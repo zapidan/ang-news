@@ -1,6 +1,5 @@
 /* global app:true */
 {
-  "app": false,
   "node": true,
   "browser": true,
   "esnext": true,
@@ -21,6 +20,8 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "angular": false
+    "angular": false,
+    "app": false,
+    "Firebase": false
   }
 }
