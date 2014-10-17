@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Auth', function ($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
+app.factory('Auth', function ($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $firebase) {
 	var ref = new Firebase(FIREBASE_URL);
 	var auth = $firebaseSimpleLogin(ref);
 
@@ -26,11 +26,23 @@ app.factory('Auth', function ($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
 			return !!Auth.user.provider;
 		},
 
+		createProfile: function (user) {
+			var profile = {
+				username: user.username,
+				md5_hash: user.md5_hash
+			};
+
+			var profileRef = $firebase(ref.child('profile'));
+
+			return profileRef.$set(user.uid, profile);
+		},
+
 		user: {}
 	};
 
 	$rootScope.$on('$firebaseSimpleLogin:login', function (e, user) {
 		console.log('logged in');
+		console.log(Auth.user);
 		angular.copy(user, Auth.user);
 	});
 
