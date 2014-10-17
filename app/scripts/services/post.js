@@ -12,10 +12,13 @@ app.factory('Post', function($firebase, FIREBASE_URL) {
       });
     },
     get: function(postId) {
-      return posts.$child(postId);
+      return $firebase(ref.child('posts').child(postId)).$asObject();
     },
     delete: function(postId) {
       return posts.$remove(postId);
+    },
+    comments: function (postId) {
+      return $firebase(ref.child('comments').child(postId)).$asArray();
     }
   };
 
