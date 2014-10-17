@@ -1,3 +1,6 @@
+/* global app:true */
+/* exported app */
+
 'use strict';
 
 /**
@@ -46,6 +49,10 @@ var app = angular.module('angNewsApp', [
             return Auth.resolveUser();
           }
         }
+      })
+      .when('/users/:userId', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl'
       })
       .otherwise({
         redirectTo: '/'
