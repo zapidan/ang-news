@@ -18,6 +18,7 @@ app.factory('Profile', function ($window, FIREBASE_URL, $firebase, Post, $q) {
 
           for(var i = 0; i<data.length; i++) {
             var value = data[i].$value;
+            // { postId: postValue};
             posts[value] = Post.get(value);
           }
           defer.resolve(posts);
